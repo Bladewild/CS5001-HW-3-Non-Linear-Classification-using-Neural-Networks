@@ -1,0 +1,12 @@
+CS-5001: HW#1
+Programmer: Alain Markus P. Santos-Tankia
+
+Using learning rate eta = 4.376297E-06
+Using 5000 iterations.
+
+OUPUT
+w0: 47.082527
+w1: 10.999534
+
+Validation
+Sum-of-Squares Error = 0.016935525
