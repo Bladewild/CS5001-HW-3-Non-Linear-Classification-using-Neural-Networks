@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "CS5001-HW-2/1.0.0": {
+        "runtime": {
+          "CS5001-HW-2.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CS5001-HW-2/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,11 +1,11 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.0": {}
+    ".NETCoreApp,Version=v3.1": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.0": []
+    ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
     "C:\\Users\\Marky\\.nuget\\packages\\": {}
@@ -13,25 +13,23 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-1-Linear-Regression-and-Chocolate-Chips\\HW1.csproj",
-      "projectName": "HW1",
-      "projectPath": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-1-Linear-Regression-and-Chocolate-Chips\\HW1.csproj",
+      "projectUniqueName": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-2\\CS5001-HW-2.csproj",
+      "projectName": "CS5001-HW-2",
+      "projectPath": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-2\\CS5001-HW-2.csproj",
       "packagesPath": "C:\\Users\\Marky\\.nuget\\packages\\",
-      "outputPath": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-1-Linear-Regression-and-Chocolate-Chips\\obj\\",
+      "outputPath": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Marky\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Marky\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp3.0"
+        "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "netcoreapp3.0": {
+        "netcoreapp3.1": {
           "projectReferences": {}
         }
       },
@@ -42,7 +40,7 @@
       }
     },
     "frameworks": {
-      "netcoreapp3.0": {
+      "netcoreapp3.1": {
         "imports": [
           "net461",
           "net462",
@@ -58,7 +56,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

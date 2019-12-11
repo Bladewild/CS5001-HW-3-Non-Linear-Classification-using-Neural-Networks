@@ -1,0 +1,11 @@
+F:\DesktopFolders\School\5001\CS5001-HW-2\bin\Debug\netcoreapp3.1\CS5001-HW-2.exe
+F:\DesktopFolders\School\5001\CS5001-HW-2\bin\Debug\netcoreapp3.1\CS5001-HW-2.deps.json
+F:\DesktopFolders\School\5001\CS5001-HW-2\bin\Debug\netcoreapp3.1\CS5001-HW-2.runtimeconfig.json
+F:\DesktopFolders\School\5001\CS5001-HW-2\bin\Debug\netcoreapp3.1\CS5001-HW-2.runtimeconfig.dev.json
+F:\DesktopFolders\School\5001\CS5001-HW-2\bin\Debug\netcoreapp3.1\CS5001-HW-2.dll
+F:\DesktopFolders\School\5001\CS5001-HW-2\bin\Debug\netcoreapp3.1\CS5001-HW-2.pdb
+F:\DesktopFolders\School\5001\CS5001-HW-2\obj\Debug\netcoreapp3.1\CS5001-HW-2.csprojAssemblyReference.cache
+F:\DesktopFolders\School\5001\CS5001-HW-2\obj\Debug\netcoreapp3.1\CS5001-HW-2.AssemblyInfoInputs.cache
+F:\DesktopFolders\School\5001\CS5001-HW-2\obj\Debug\netcoreapp3.1\CS5001-HW-2.AssemblyInfo.cs
+F:\DesktopFolders\School\5001\CS5001-HW-2\obj\Debug\netcoreapp3.1\CS5001-HW-2.dll
+F:\DesktopFolders\School\5001\CS5001-HW-2\obj\Debug\netcoreapp3.1\CS5001-HW-2.pdb
