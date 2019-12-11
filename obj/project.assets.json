@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-2\\CS5001-HW-2.csproj",
+      "projectUniqueName": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\\CS5001-HW-2.csproj",
       "projectName": "CS5001-HW-2",
-      "projectPath": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-2\\CS5001-HW-2.csproj",
+      "projectPath": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\\CS5001-HW-2.csproj",
       "packagesPath": "C:\\Users\\Marky\\.nuget\\packages\\",
-      "outputPath": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-2\\obj\\",
+      "outputPath": "F:\\DesktopFolders\\School\\5001\\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Marky\\AppData\\Roaming\\NuGet\\NuGet.Config"

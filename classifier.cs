@@ -350,6 +350,7 @@ namespace HW2
                 {
                     value+=u.weightAt[k]*inputVector[k];// W[ k ][ u ] * input[ k ]
                 }
+                Console.WriteLine(value);
                 outputVector.Add(Sigmoid(value));
                 index++;
                 //output[ u ] := sig ( ∑k=0ni W[ k ][ u ] * input[ k ] )
@@ -375,9 +376,9 @@ namespace HW2
                 for(int unit_no=0;unit_no<numberofUnits;unit_no++)//∑u=0nu
                 {
                     // delta[ u ] * W[ j ][ u ] ) * input[ j ] * ( 1 - input[ j ]
-                    //newDeltaValue+= delta[unit_no] * Units[unit_no].weightAt[j] * inputVector[j] * ( 1 - inputVector[j]); // TODO CHECK EQUATIONS
-                    //Console.WriteLine(delta[unit_no] +","+ Units[unit_no].weightAt[j] +","+ inputVector[j]);
-                    newDeltaValue+= delta[unit_no] * Units[unit_no].weightAt[j] * inputVector[j]; //* ( 1 - inputVector[j]); // TODO CHECK EQUATIONS
+                    newDeltaValue+= delta[unit_no] * Units[unit_no].weightAt[j] * inputVector[j] * ( 1 - inputVector[j]); // TODO CHECK EQUATIONS
+                    Console.WriteLine(delta[unit_no] +","+ Units[unit_no].weightAt[j] +","+ inputVector[j]);
+                    //newDeltaValue+= delta[unit_no] * Units[unit_no].weightAt[j] * inputVector[j]; //* ( 1 - inputVector[j]); // TODO CHECK EQUATIONS
                 }
                 delta_prev[j]=newDeltaValue;
             }
@@ -402,7 +403,10 @@ namespace HW2
         }
         public static float Sigmoid(double value) {
             //sig ( ∑k=0ni W[ k ][ u ] * input[ k ] )
-            return (float) (1.0 / (1.0 + Math.Exp(-value)));
+            float calculated= (float) (1.0 / (1.0 + Math.Exp(-value)));
+            //Console.WriteLine("Value: "+value);
+            //Console.WriteLine("Sigmoid: "+calculated);
+            return calculated;
         }
 
         
