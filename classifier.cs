@@ -15,8 +15,9 @@ namespace HW2
         private static List<Coordinate> ListofValidData = new List<Coordinate>();
         private static List<float> bestInputUnits = new List<float>();
         private static List<float> bestOutputUnits = new List<float>();
+        private static string bestProduced = "";
         private static float learningRate;
-        public static int bestIteration,bestCorrect;
+        public static int bestIteration, bestCorrect;
 
         public static float bestSSE, bestETa;
         public static int numIterations = 1000;
@@ -31,7 +32,7 @@ namespace HW2
                 y = inputY;
                 type = inputType;
             }
-            public Coordinate(string inputX, string inputY,string inputType)
+            public Coordinate(string inputX, string inputY, string inputType)
             {
                 x = Int32.Parse(inputX);
                 y = Int32.Parse(inputY);
@@ -39,7 +40,7 @@ namespace HW2
             }
             public override string ToString()
             {
-                return "[" + x + "," + y + ","+type+"]";
+                return "[" + x + "," + y + "," + type + "]";
             }
         }
 
@@ -72,15 +73,19 @@ namespace HW2
 
             Console.WriteLine("--------------");
             Console.WriteLine("Input Units");
-            foreach(float f in bestInputUnits)
+            foreach (float f in bestInputUnits)
             {
                 Console.WriteLine(f);
             }
             Console.WriteLine("Output Units");
-            foreach(float f in bestOutputUnits)
+            foreach (float f in bestOutputUnits)
             {
                 Console.WriteLine(f);
             }
+            Console.WriteLine("-----------");
+
+            Console.WriteLine("bestProduced: " + bestProduced);
+            Console.WriteLine("-----------");
 
             Console.WriteLine("bestCorrect: " + bestCorrect);
             Console.WriteLine("bestsumofSquaresError: " + bestSSE);
@@ -91,11 +96,11 @@ namespace HW2
             StreamWriter file = new System.IO.StreamWriter("'classifieroutput.txt");
             file.WriteLine("CS-5001: HW#1");
             file.WriteLine("Programmer: Alain Markus P. Santos-Tankia\n");
-            file.WriteLine("Using learning rate eta = "+bestETa);
-            file.WriteLine("Using "+numIterations+" iterations.\n");
+            file.WriteLine("Using learning rate eta = " + bestETa);
+            file.WriteLine("Using " + numIterations + " iterations.\n");
             file.WriteLine("OUPUT");
             file.WriteLine("Validation");
-            file.WriteLine("Sum-of-Squares Error = "+bestSSE);
+            file.WriteLine("Sum-of-Squares Error = " + bestSSE);
             file.Close();
 
         }
@@ -113,12 +118,12 @@ namespace HW2
 
             string[] input;
 
-            
+
 
             while (sr.EndOfStream == false)
             {
                 input = sr.ReadLine().Split('	');
-                ListofData.Add(new Coordinate(input[0], input[1],input[2]));
+                ListofData.Add(new Coordinate(input[0], input[1], input[2]));
             }
 
             // to close the stream 
@@ -136,10 +141,10 @@ namespace HW2
             while (sr.EndOfStream == false)
             {
                 input = sr.ReadLine().Split('	');
-                if(input[0] == "-----------------------------")
+                if (input[0] == "-----------------------------")
                     continue;
 
-                ListofValidData.Add(new Coordinate(input[0], input[1],input[2]));
+                ListofValidData.Add(new Coordinate(input[0], input[1], input[2]));
             }
 
             // to close the stream 
@@ -156,121 +161,202 @@ namespace HW2
             //   NN : A sequence of Layers
 
             //   Ycap[ ny ] : output of the Neural Network
-            learningRate = cryptoRando.GenerateRandomFloat(0.00000000f, 100.00000000f, 8);
-            int numOutput= 1;
-            int numInput= 3;
-            layer[] neuralnetwork= createNeuralNetwork();
+            learningRate =cryptoRando.GenerateRandomFloat(0.0000000f, 1.0000000f, 7);
+            int numOutput = 1;
+            int numInput = 3;
+            layer[] neuralnetwork = createNeuralNetwork();
             float ycap;
-            
-           
-            string evostreak="";
-            foreach(Coordinate e in ListofData) //FOR EACH example e in E 
+
+            /*
+            Console.WriteLine("BEFORE");
+            Console.WriteLine("INPUT");
+            foreach (unit u in neuralnetwork[0].Units)
             {
-                //in this case e's
-                List<float> values = new List<float>(); //values := e.X
-                values.Add(e.x);
-                values.Add(e.y);
-                for(int i=0;i<neuralnetwork.Length;i++) // FOR EACH layer L in NN, from input to output
-                {
-                    values= neuralnetwork[i].feedForward(values);
-                   //Console.WriteLine("--------");
-                   //foreach(float v in values)
-                   //{
-                   //    Console.WriteLine(v);
-
-                   //}
-                   //Console.WriteLine("--------");
-                }
-                ycap = values[0];
-                evostreak+= ycap.ToString();
-                
-                //   Ycap := values
-                //   FOR EACH output j in [0..ny]
-                //	 delta[j] := ( e.Yj - Ycap[y] ) * Ycap[y] * ( 1 - Ycap[y] )
-                List<float> delta = new List<float>(); 
-                //maybe change this if same or not
-                //save float delta1 = (e.type-ycap)*ycap*(1f - ycap);\
-                //Console.WriteLine(e.type +"="+ycap+"?");
-                float delta1 = e.type-ycap;
-                delta.Add(delta1);
-                //Console.WriteLine("delta1: "+delta1);
-
-                for(int i=neuralnetwork.Length-1;i>=0;i--) // FOR EACH layer L in NN, from output to input
-                {
-                    //remember to go output --> input
-                    delta = neuralnetwork[i].backProp(delta,learningRate);
-                }
+                foreach (float input in u.weightAt)
+                    Console.WriteLine(input);
             }
-            Console.WriteLine("evostreak:"+evostreak);
+            Console.WriteLine("OUTPUT");
+
+           
+
+            foreach (unit u in neuralnetwork[1].Units)
+            {
+                foreach (float input in u.weightAt)
+                    Console.WriteLine(input);
+            }
+
+            Console.WriteLine("---------------------");
+            */
+
+            string evostreak = "";
+            string dd = "";
+            for (int k = 0; k < 1; k++)
+            {
+
+                foreach (Coordinate e in ListofData) //FOR EACH example e in E 
+                {
+                    //in this case e's
+                    List<float> values = new List<float>(); //values := e.X
+                    values.Add(e.x / 100f);
+                    values.Add(e.y / 100f);
+                    for (int i = 0; i < neuralnetwork.Length; i++) // FOR EACH layer L in NN, from input to output
+                    {
+                        values = neuralnetwork[i].feedForward(values);
+                        //Console.WriteLine("--------");
+                        //foreach(float v in values)
+                        //{
+                        //    Console.WriteLine(v);
+
+                        //}
+                        //Console.WriteLine("--------");
+                    }
+                    ycap = values[0];
+                    evostreak += ycap.ToString();
+                    evostreak += ",";
+
+                    //   Ycap := values
+                    //   FOR EACH output j in [0..ny]
+                    //	 delta[j] := ( e.Yj - Ycap[y] ) * Ycap[y] * ( 1 - Ycap[y] )
+                    List<float> delta = new List<float>();
+                    //maybe change this if same or not
+                    float delta1 = ((e.type-1) - ycap) * ycap * (1f - ycap);
+                    //Console.WriteLine(e.type +"="+ycap+"?");
+                    //float delta1 = e.type - ycap;
+                    delta.Add(delta1);
+                    dd += delta1.ToString() + ",";
+                    //Console.WriteLine("delta1: "+delta1);
+
+                    for (int i = neuralnetwork.Length - 1; i >= 0; i--) // FOR EACH layer L in NN, from output to input
+                    {
+                        //Console.WriteLine(i);
+                        //remember to go output --> input
+                        /*
+                        foreach(float f in delta)
+                        {
+
+                            Console.WriteLine("Bdelta "+i+": "+f);
+                        }
+                        */
+                        delta = neuralnetwork[i].backProp(delta, learningRate);
+                        /*
+                        foreach(float f in delta)
+                        {
+                            Console.WriteLine("Adelta "+i+": "+f);
+                        }
+
+                        Console.WriteLine("MIDDLE");
+                        Console.WriteLine("INPUT");
+                        foreach (unit u in neuralnetwork[0].Units)
+                        {
+                            foreach (float input in u.weightAt)
+                                Console.WriteLine(input);
+                        }
+                        Console.WriteLine("OUTPUT");
+
+
+                        foreach (unit u in neuralnetwork[1].Units)
+                        {
+                            foreach (float input in u.weightAt)
+                                Console.WriteLine(input);
+                        }
+
+                        Console.WriteLine("---------------------");
+                        */
+                    }
+
+                }
+
+            }
+            //Console.WriteLine("deltas prodoced:" + dd);
+            //Console.WriteLine("Ycaps Produced:" + evostreak);
+            evostreak = "";
 
             //sum of squares
 
             //use validation
             float sumofSquaresError = 0.0f;
-            int correct=0;
+            int correct = 0;
             Console.WriteLine("Guessing");
+            Console.WriteLine("");
             foreach (Coordinate e in ListofValidData)
             {
                 List<float> values = new List<float>(); //values := e.X
                 values.Add(e.x);
                 values.Add(e.y);
-                
-                for(int i=0;i<neuralnetwork.Length;i++) // FOR EACH layer L in NN, from input to output
+
+                for (int i = 0; i < neuralnetwork.Length; i++) // FOR EACH layer L in NN, from input to output
                 {
-                    values= neuralnetwork[i].feedForward(values);
+                    values = neuralnetwork[i].feedForward(values);
                 }
-                Console.Write(values[0]);
-            
-                float delta = (float)(e.type) - values[0];
-                if(e.type==values[0])
+
+
+                //ycap = values[0];
+                Console.Write(values[0] + ",");
+                /*
+                if(values[0]>0.5f)
+                    values[0]=2;
+                else
+                    values[0]=1;*/
+                evostreak += values[0].ToString();
+                evostreak += ",";
+
+                //evostreak += values[0].ToString();
+                float delta = (float)(e.type) - (values[0]+1);
+                if (e.type == values[0])
                     correct++;
                 sumofSquaresError += (float)Math.Pow(delta, 2);
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Correct" + correct);
+            /*
             Console.WriteLine();
             Console.WriteLine("---");
-            Console.WriteLine("Iteration: "+iteration);
+            Console.WriteLine("Iteration: " + iteration);
             Console.WriteLine(sumofSquaresError);
-            Console.WriteLine(correct);            
+            Console.WriteLine(correct);
             Console.WriteLine(learningRate);
-            /*
+
+            Console.WriteLine("AFTER");
             Console.WriteLine("INPUT");
-            foreach(unit u in neuralnetwork[0].Units)
+            foreach (unit u in neuralnetwork[0].Units)
             {
-                foreach(float input in u.weightAt)
+                foreach (float input in u.weightAt)
                     Console.WriteLine(input);
             }
             Console.WriteLine("OUTPUT");
-            
-            bestOutputUnits= new List<float>();
-            
-            foreach(unit u in neuralnetwork[1].Units)
+
+            bestOutputUnits = new List<float>();
+
+            foreach (unit u in neuralnetwork[1].Units)
             {
-                foreach(float input in u.weightAt)
+                foreach (float input in u.weightAt)
                     Console.WriteLine(input);
-            }
-            */
+            }*/
+
             Console.WriteLine("---------------------");
-            
+
             //use validation
             if (sumofSquaresError < bestSSE)
             {
                 bestIteration = iteration;
-                bestInputUnits= new List<float>();
+                bestInputUnits = new List<float>();
                 bestCorrect = correct;
-                foreach(unit u in neuralnetwork[0].Units)
+                bestProduced = evostreak;
+                foreach (unit u in neuralnetwork[0].Units)
                 {
-                    foreach(float input in u.weightAt)
+                    foreach (float input in u.weightAt)
                         bestInputUnits.Add(input);
                 }
-                
-                bestOutputUnits= new List<float>();
-                
-                foreach(unit u in neuralnetwork[1].Units)
+
+                bestOutputUnits = new List<float>();
+
+                foreach (unit u in neuralnetwork[1].Units)
                 {
-                    foreach(float input in u.weightAt)
+                    foreach (float input in u.weightAt)
                         bestOutputUnits.Add(input);
                 }
-                
+
                 bestSSE = sumofSquaresError;
                 bestETa = learningRate;
             }
@@ -278,79 +364,80 @@ namespace HW2
 
         public static layer[] createNeuralNetwork()
         {
-            layer inputLayer = new layer(4,2,"input");
-            layer outputLayer= new layer(1,4,"output");
-            List<layer> networkModel= new List<layer>();
+            layer inputLayer = new layer(4, 2, "input");
+            layer outputLayer = new layer(1, 4, "output");
+            List<layer> networkModel = new List<layer>();
             networkModel.Add(inputLayer);
             networkModel.Add(outputLayer);
             return networkModel.ToArray();
         }
 
-        
+
 
     }
 
     class layer
     {
-        
+
 
         //nu : number of units
         //ni : number of inputs
         //W[ ni+1 ][ nu ] : Unit's weights // W[k][j] is weight applied to input k for unit j
         //input[ ni+1 ] : input vector
         //output[ nu ] : output vector
-        int numberofUnits,numberofInputs;
+        int numberofUnits, numberofInputs;
         public List<unit> Units;
-        public List<float> inputVector= new List<float>();
-        public List<float> outputVector= new List<float>();
-        List<float> delta_prev=new List<float>();
+        public List<float> inputVector = new List<float>();
+        public List<float> outputVector = new List<float>();
+        List<float> delta_prev = new List<float>();
         public string name;
 
-        float alpha;
+        //float alpha;
 
-        public layer(int inputNOFU,int inputNOFI,string inputName)
-        {            
-            
-            alpha=cryptoRando.GenerateRandomFloat(0.0000000f, 1.0000000f, 7); //momentum constant change 0-1
-            name= inputName;
+        public layer(int inputNOFU, int inputNOFI, string inputName)
+        {
+
+            //alpha = cryptoRando.GenerateRandomFloat(0.0000000f, 1.0000000f, 7); //momentum constant change 0-1
+            name = inputName;
             numberofUnits = inputNOFU;
             numberofInputs = inputNOFI;//might not be needed
             //create Units
-            Units=new List<unit>();
-            for(int i=0;i<numberofUnits;i++)    
+            Units = new List<unit>();
+            for (int i = 0; i < numberofUnits; i++)
             {
-                Units.Add(new unit(numberofUnits,numberofInputs));
+                Units.Add(new unit(numberofUnits, numberofInputs));
             }
-            for(int i=0;i<numberofInputs;i++)    
+            for (int i = 0; i < numberofInputs; i++)
             {
                 delta_prev.Add(0f);
             }
         }
-        public List<float> feedForward(List<float> inp )//inp [ni]
+        public List<float> feedForward(List<float> inp)//inp [ni]
         {
             //refresh/update vectors
             inputVector = inp; //input := inp;
-            /*
-            Console.WriteLine("feedforward: "+name);
+
+            //Console.WriteLine("feedforward: "+name);
             inputVector.Add(1);//input[ ni ] := 1; extra special
+            /*
             foreach(float f in inputVector)
             {
                 Console.WriteLine(f);
             }
             Console.WriteLine("feedforward2");
             */
-            outputVector= new List<float>();
+            outputVector = new List<float>();
 
-            int index=0;
-            foreach(unit u in Units)//FOR every unit u in [ 0..nu ]
+            int index = 0;
+            foreach (unit u in Units)//FOR every unit u in [ 0..nu ]
             {
-                double value=0;
+                double value = 0;
                 //∑k=0ni W[ k ][ u ] * input[ k ]
-                for(int k=0;k<numberofInputs;k++)//∑k=0ni
+                for (int k = 0; k < numberofInputs; k++)//∑k=0ni
                 {
-                    value+=u.weightAt[k]*inputVector[k];// W[ k ][ u ] * input[ k ]
+                    value += u.weightAt[k] * inputVector[k];// W[ k ][ u ] * input[ k ]
                 }
-                Console.WriteLine(value);
+                //Console.WriteLine(value);
                 outputVector.Add(Sigmoid(value));
                 index++;
                 //output[ u ] := sig ( ∑k=0ni W[ k ][ u ] * input[ k ] )
@@ -365,71 +452,95 @@ namespace HW2
         //alpha : momentum constant
         //delta_prev[ ni ] : error term of input
 
-        public List<float> backProp(List<float> delta,float eta)//delta [nu]
+        public List<float> backProp(List<float> delta, float eta)//delta [nu]
         {
             //FOR EACH input j in [0..ni]
-            for(int j=0;j<numberofInputs;j++)
+            for (int j = 0; j < numberofInputs; j++)
             {
-                float newDeltaValue=0f;
-                
+                float newDeltaValue = 0f;
+
                 //delta_prev[ j ] := ( ∑u=0nu delta[ u ] * W[ j ][ u ] ) * input[ j ] * ( 1 - input[ j ] )
-                for(int unit_no=0;unit_no<numberofUnits;unit_no++)//∑u=0nu
+                for (int unit_no = 0; unit_no < numberofUnits; unit_no++)//∑u=0nu
                 {
                     // delta[ u ] * W[ j ][ u ] ) * input[ j ] * ( 1 - input[ j ]
-                    newDeltaValue+= delta[unit_no] * Units[unit_no].weightAt[j] * inputVector[j] * ( 1 - inputVector[j]); // TODO CHECK EQUATIONS
-                    Console.WriteLine(delta[unit_no] +","+ Units[unit_no].weightAt[j] +","+ inputVector[j]);
+                    newDeltaValue += delta[unit_no] * Units[unit_no].weightAt[j] * inputVector[j] * (1 - inputVector[j]); // TODO CHECK EQUATIONS
+                    //Console.WriteLine(delta[unit_no] +","+ Units[unit_no].weightAt[j] +","+ inputVector[j]);
                     //newDeltaValue+= delta[unit_no] * Units[unit_no].weightAt[j] * inputVector[j]; //* ( 1 - inputVector[j]); // TODO CHECK EQUATIONS
                 }
-                delta_prev[j]=newDeltaValue;
+                delta_prev[j] = newDeltaValue;
             }
 
-            
-            //Console.WriteLine("|--|");
-            for(int j=0;j<numberofInputs;j++)//FOR EACH input j in [0..ni]
+
+            /*
+            Console.WriteLine("BP1----");
+            Console.WriteLine(name);
+            foreach (unit u in Units)
             {
-                for(int unit_no=0;unit_no<numberofUnits;unit_no++) //FOR EACH unit u in [0..nu]
+                foreach (float input in u.weightAt)
+                    Console.WriteLine(input);
+            }
+
+            Console.WriteLine("---------------------");*/
+
+            //Console.WriteLine("|--|");
+            for (int j = 0; j < numberofInputs; j++)//FOR EACH input j in [0..ni]
+            {
+                for (int unit_no = 0; unit_no < numberofUnits; unit_no++) //FOR EACH unit u in [0..nu]
                 {
                     //deltaW[ j ][ u ] := eta*delta[ u ]*output[ u ] + alpha*deltaW[ j ][ u ]
                     //Console.WriteLine(eta*delta[unit_no] +","+ outputVector[unit_no] +","+ alpha*Units[unit_no].weightChange[j]);
-                    Units[unit_no].weightChange[j] = eta*delta[unit_no]*outputVector[unit_no] + alpha*Units[unit_no].weightChange[j];
+                    //Units[unit_no].weightChange[j] = eta * delta[unit_no] * outputVector[unit_no] + alpha * Units[unit_no].weightChange[j];
+                    Units[unit_no].weightChange[j] = eta * delta[unit_no] * outputVector[unit_no];// + alpha * Units[unit_no].weightChange[j];
                     //Console.WriteLine( Units[unit_no].weightChange[j]);
                     //W[ j ][ u ] := W[ j ][ u ] + deltaW[ j ][ u ]
+                    //Console.WriteLine("Before: "+ Units[unit_no].weightAt[j]);
                     Units[unit_no].weightAt[j] = Units[unit_no].weightAt[j] + Units[unit_no].weightChange[j];
+                    //Console.WriteLine("After: "+ Units[unit_no].weightAt[j]);
                 }
             }
-            //Console.WriteLine("||");
+
+            /*
+            Console.WriteLine("BP2----------");
+            Console.WriteLine(name);
+            foreach (unit u in Units)
+            {
+                foreach (float input in u.weightAt)
+                    Console.WriteLine(input);
+            }
+
+            Console.WriteLine("---------------------");*/
             return delta_prev;
             //RETURN delta_prev;
         }
-        public static float Sigmoid(double value) {
+        public static float Sigmoid(double value)
+        {
             //sig ( ∑k=0ni W[ k ][ u ] * input[ k ] )
-            float calculated= (float) (1.0 / (1.0 + Math.Exp(-value)));
+            float calculated = (float)(1.0 / (1.0 + Math.Exp(-value)));
             //Console.WriteLine("Value: "+value);
             //Console.WriteLine("Sigmoid: "+calculated);
             return calculated;
         }
-
-        
-
     }
 
     public struct unit
     {
         public List<float> weightAt;
         public List<float> weightChange;
-        public unit(int numOutput,int numInput)
+        public unit(int numOutput, int numInput)
         {
-            weightAt=new List<float>(); //randomize weights
-            weightChange=new List<float>(); //randomize weights
-            for(int i=0;i<numInput+1;i++)
+            weightAt = new List<float>(); //randomize weights
+            weightChange = new List<float>(); //randomize weights
+            for (int i = 0; i < numInput + 1; i++)
             {
-                weightAt.Add(cryptoRando.GenerateRandomFloat(0.00f, 100.00f, 5));
-            }                          
-            for(int i=0;i<numInput+1;i++)
+                float v = cryptoRando.GenerateRandomFloat(0.0000000f, 2.0000000f, 7) - 1.0f;
+                //Console.WriteLine(v);
+                weightAt.Add(v);
+            }
+            for (int i = 0; i < numInput + 1; i++)
             {
                 weightChange.Add(0f);
-            }  
-        }            
+            }
+        }
     }
 
     class cryptoRando

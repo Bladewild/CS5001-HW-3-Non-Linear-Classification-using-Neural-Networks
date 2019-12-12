@@ -20,3 +20,14 @@ F:\DesktopFolders\School\5001\CS5001-HW-3-Non-Linear-Classification-using-Neural
 F:\DesktopFolders\School\5001\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\obj\Debug\netcoreapp3.1\CS5001-HW-2.AssemblyInfo.cs
 F:\DesktopFolders\School\5001\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\obj\Debug\netcoreapp3.1\CS5001-HW-2.dll
 F:\DesktopFolders\School\5001\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\obj\Debug\netcoreapp3.1\CS5001-HW-2.pdb
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\bin\Debug\netcoreapp3.1\CS5001-HW-2.exe
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\bin\Debug\netcoreapp3.1\CS5001-HW-2.deps.json
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\bin\Debug\netcoreapp3.1\CS5001-HW-2.runtimeconfig.json
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\bin\Debug\netcoreapp3.1\CS5001-HW-2.runtimeconfig.dev.json
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\bin\Debug\netcoreapp3.1\CS5001-HW-2.dll
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\bin\Debug\netcoreapp3.1\CS5001-HW-2.pdb
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\obj\Debug\netcoreapp3.1\CS5001-HW-2.csprojAssemblyReference.cache
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\obj\Debug\netcoreapp3.1\CS5001-HW-2.AssemblyInfoInputs.cache
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\obj\Debug\netcoreapp3.1\CS5001-HW-2.AssemblyInfo.cs
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\obj\Debug\netcoreapp3.1\CS5001-HW-2.dll
+C:\Users\marky\OneDrive\Desktop\CS5001-HW-3-Non-Linear-Classification-using-Neural-Networks\obj\Debug\netcoreapp3.1\CS5001-HW-2.pdb
